@@ -1,10 +1,17 @@
+import { useState } from 'react';
+
 export default function Login() {
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const toggleCheckbox = () => {
+    setPasswordVisible((prev) => !prev);
+  };
+
   return (
     <main className="bg-[url('/login-bg.jpg')] bg-cover bg-center h-screen w-screen bg-no-repeat">
-      <div className="h-full w-full backdrop-blur-xs bg-black/30 flex items-center justify-center flex-col">
-        <h1 className="font-montserrat font-bold text-3xl text-white mb-10">Auto AIDER Admin</h1>
+      <div className="h-full w-full backdrop-blur-sm bg-black/20 flex items-center justify-center flex-col">
         <div className="bg-white/50 rounded-xl p-5">
-          <h2 className="font-montserrat font-bold text-2xl text-center mb-5">Login</h2>
+          <h2 className="font-montserrat font-bold text-2xl text-center mb-5 text-white">Log In</h2>
           <form>
             <div className="flex flex-col mb-5">
               <label className="input validator bg-white">
@@ -18,10 +25,6 @@ export default function Login() {
                   type="text"
                   required
                   placeholder="Username"
-                  pattern="[A-Za-z][A-Za-z0-9\-]*"
-                  minLength={3}
-                  maxLength={30}
-                  title="Only letters, numbers or dash"
                   className="font-montserrat text-black text-base outline-none"
                 />
               </label>
@@ -35,22 +38,27 @@ export default function Login() {
                   </g>
                 </svg>
                 <input
-                  type="password"
+                  type={passwordVisible ? 'text' : 'password'}
                   required
                   placeholder="Password"
-                  minLength={8}
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                  title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
                   className="font-montserrat text-black text-base outline-none"
                 />
               </label>
             </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" id="checkbox" className="checkbox checkbox-sm checked:bg-blue-800" />
-              <label htmlFor="checkbox" className="font-montserrat text-sm">
+            <div className="flex items-center gap-2 mb-5">
+              <input
+                type="checkbox"
+                id="checkbox"
+                className="checkbox checkbox-sm checked:bg-[#000B58]"
+                onClick={() => toggleCheckbox()}
+              />
+              <label htmlFor="checkbox" className="font-montserrat text-sm text-white">
                 Show password
               </label>
             </div>
+            <button className="btn btn-md bg-[#000B58] hover:bg-[#2A3A8E] border-none w-full font-montserrat text-base text-white">
+              Log In
+            </button>
           </form>
         </div>
       </div>
