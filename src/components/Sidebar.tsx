@@ -1,7 +1,12 @@
-import Logo from '../assets/auto-aider-logo.png';
+import Logo from '../assets/auto-aider-logo-white.png';
 import { NavLink } from 'react-router';
+import { clearTokens } from '../utils/tokenStorage';
 
 export default function Sidebar() {
+  const handleLogout = async () => {
+    await clearTokens();
+  };
+
   return (
     <div className="drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" defaultChecked />
@@ -14,7 +19,6 @@ export default function Sidebar() {
           </div>
 
           <ul className="menu w-full grow bg-[#000B58]">
-            {/* list item */}
             <li>
               <NavLink
                 to="/"
@@ -26,17 +30,17 @@ export default function Sidebar() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   stroke="#ffffff"
-                  stroke-width="1.2"
+                  strokeWidth="1.2"
                   className="inline-block size-9 my-1.5"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     <path
                       d="M9 20H7C5.89543 20 5 19.1046 5 18V10.9199C5 10.336 5.25513 9.78132 5.69842 9.40136L10.6984 5.11564C11.4474 4.47366 12.5526 4.47366 13.3016 5.11564L18.3016 9.40136C18.7449 9.78132 19 10.336 19 10.9199V18C19 19.1046 18.1046 20 17 20H15M9 20V14C9 13.4477 9.44772 13 10 13H14C14.5523 13 15 13.4477 15 14V20M9 20H15"
                       stroke="#ffffff"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                   </g>
                 </svg>
@@ -44,7 +48,6 @@ export default function Sidebar() {
               </NavLink>
             </li>
 
-            {/* list item */}
             <li>
               <NavLink
                 to="/account-approval"
@@ -57,11 +60,11 @@ export default function Sidebar() {
                   id="request-send-16px"
                   xmlns="http://www.w3.org/2000/svg"
                   stroke="#ffffff"
-                  stroke-width="0.00016"
+                  strokeWidth="0.00016"
                   className="inline-block size-9 my-1.5"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {' '}
                     <path
@@ -73,6 +76,43 @@ export default function Sidebar() {
                   </g>
                 </svg>
                 <span className="is-drawer-close:hidden font-montserrat text-base">Account Approval</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/login"
+                onClick={handleLogout}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right p-0 is-drawer-close:flex is-drawer-close:items-center is-drawer-close:justify-center hover:bg-white/10"
+                data-tip="Logout"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  stroke="#ffffff"
+                  className="inline-block size-9 my-1.5"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {' '}
+                    <path
+                      d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17"
+                      stroke="#ffffff"
+                      strokeWidth="1.6799999999999997"
+                      strokeLinecap="round"
+                    ></path>{' '}
+                    <path
+                      d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15"
+                      stroke="#ffffff"
+                      strokeWidth="1.6799999999999997"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>{' '}
+                  </g>
+                </svg>
+                <span className="is-drawer-close:hidden font-montserrat text-base">Logout</span>
               </NavLink>
             </li>
           </ul>
