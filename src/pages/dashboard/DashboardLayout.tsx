@@ -6,7 +6,7 @@ export default function DashboardLayout() {
     <div className="flex flex-row">
       <Sidebar />
 
-      <main className="bg-white w-full h-screen p-10">
+      <main className="bg-[#f2f4f7] w-full h-screen p-10">
         <Outlet />
       </main>
     </div>

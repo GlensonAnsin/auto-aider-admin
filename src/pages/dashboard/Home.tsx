@@ -1,8 +1,12 @@
+import { useLoaderData } from 'react-router';
+
 export default function Home() {
+  const { res } = useLoaderData();
+
   return (
     <div>
-      <h1 className="font-montserrat text-3xl text-[#000B58] font-bold">Welcome, Glenson</h1>
-      <div className="stats shadow bg-[#F7F7F7] mt-10">
+      <h1 className="font-montserrat text-3xl text-[#000B58] font-bold">{`Welcome, ${res.firstname}`}</h1>
+      <div className="stats shadow-lg bg-white mt-10">
         <div className="stat">
           <div className="stat-figure text-secondary">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block h-8 w-8">

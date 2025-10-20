@@ -76,6 +76,7 @@ export default function Login() {
                 required
                 placeholder="Username"
                 className="font-montserrat text-black text-base outline-none"
+                onKeyDown={(e) => (e.key === 'Enter' ? handleLogin() : null)}
               />
             </label>
           </div>
@@ -95,6 +96,7 @@ export default function Login() {
                 required
                 placeholder="Password"
                 className="font-montserrat text-black text-base outline-none"
+                onKeyDown={(e) => (e.key === 'Enter' ? handleLogin() : null)}
               />
             </label>
           </div>
