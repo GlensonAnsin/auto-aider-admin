@@ -50,3 +50,18 @@ export const getAllUnAppShops = async () => {
     return null;
   }
 };
+
+export const getUnAppShopInfo = async (shopID: number) => {
+  try {
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/auto_repair_shop/get-unapproved-shop-info/${shopID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error('Get Unapproved Shop Info Error:', e);
+    return null;
+  }
+};

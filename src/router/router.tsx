@@ -4,7 +4,8 @@ import DashboardLayout from '../pages/dashboard/DashboardLayout';
 import Home from '../pages/dashboard/Home';
 import AccountApproval from '../pages/dashboard/AccountApproval';
 import ProtectedRoute from '../components/ProtectedRoute';
-import { getAdminInfo, getAllUnAppShops } from '../services/backendApi';
+import { getAdminInfo, getAllUnAppShops, getUnAppShopInfo } from '../services/backendApi';
+import ViewAccountApproval from '../pages/dashboard/ViewAccountApproval';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,13 @@ const router = createBrowserRouter([
         element: <AccountApproval />,
         loader: async () => {
           return { res: await getAllUnAppShops() };
+        },
+      },
+      {
+        path: 'account-approval/:shop_id',
+        element: <ViewAccountApproval />,
+        loader: async ({ params }) => {
+          return { res: await getUnAppShopInfo(Number(params.shop_id)) };
         },
       },
     ],
