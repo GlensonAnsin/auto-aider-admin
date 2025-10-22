@@ -8,11 +8,11 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="drawer-open">
+    <div className="drawer-open h-full">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" defaultChecked />
-      <div className="drawer-side is-drawer-close:overflow-visible">
+      <div className="drawer-side h-full">
         <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-        <div className="is-drawer-close:w-20 is-drawer-open:w-64 bg-base-200 flex flex-col items-start min-h-full">
+        <div className="is-drawer-close:w-20 is-drawer-open:w-64 bg-base-200 flex flex-col items-start h-full">
           <div className="bg-[#000B58] w-full">
             <img src={Logo} alt="logo" width={150} height={150} className="justify-self-center" />
             <h1 className="font-montserrat text-xl is-drawer-close:hidden text-center">Admin Panel</h1>
