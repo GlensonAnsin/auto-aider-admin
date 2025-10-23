@@ -1,8 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from 'react';
 import { NavLink, useLoaderData } from 'react-router';
 
 export default function AccountApproval() {
   const { res } = useLoaderData();
+  const [unapprovedShops, setUnapprovedShops] = useState<
+    { shopID: number; profileBG: string; shopName: string; ownerFirstName: string; ownerLastName: string }[]
+  >([]);
+
+  useEffect(() => {
+    const unapprovedShopsData: {
+      shopID: number;
+      profileBG: string;
+      shopName: string;
+      ownerFirstName: string;
+      ownerLastName: string;
+    }[] = [];
+
+    res.forEach((item: any) => {
+      unapprovedShopsData.push({
+        shopID: item.repair_shop_id,
+        profileBG: item.profile_bg,
+        shopName: item.shop_name,
+        ownerFirstName: item.owner_firstname,
+        ownerLastName: item.owner_lastname,
+      });
+    });
+
+    setUnapprovedShops(unapprovedShopsData);
+  }, [res]);
 
   return (
     <div>
@@ -12,9 +38,9 @@ export default function AccountApproval() {
           Waiting for admin approval
         </li>
 
-        {res.map((item: any) => (
-          <li key={item.repair_shop_id} className="list-row">
-            <div className="w-10 h-10 rounded-lg p-2" style={{ background: `${item.profile_bg}` }}>
+        {unapprovedShops.map((item: any) => (
+          <li key={item.shopID} className="list-row">
+            <div className="w-10 h-10 rounded-lg p-2" style={{ background: `${item.profileBG}` }}>
               <svg
                 fill="#fff"
                 version="1.1"
@@ -35,13 +61,13 @@ export default function AccountApproval() {
               </svg>
             </div>
             <div>
-              <div className="font-montserrat text-[#333]">{item.shop_name}</div>
+              <div className="font-montserrat text-[#333]">{item.shopName}</div>
               <div className="font-montserrat text-xs uppercase font-semibold opacity-60 text-[#555]">
-                {`${item.owner_firstname} ${item.owner_lastname}`}
+                {`${item.ownerFirstName} ${item.ownerLastName}`}
               </div>
             </div>
             <NavLink
-              to={`/account-approval/${item.repair_shop_id}`}
+              to={`/account-approval/${item.shopID}`}
               className="btn bg-[#000B58] hover:bg-[#000B58]/75 border-none"
             >
               View

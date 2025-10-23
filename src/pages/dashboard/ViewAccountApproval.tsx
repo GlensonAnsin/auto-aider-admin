@@ -1,8 +1,14 @@
-import { useLoaderData, NavLink } from 'react-router';
+import { useLoaderData, NavLink, useNavigate } from 'react-router';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { updateApprovalStatus } from '../../services/backendApi';
+import { useState } from 'react';
 
 export default function ViewAccountApproval() {
+  const navigate = useNavigate();
   const { res } = useLoaderData();
+  const [approveLoading, setApproveLoading] = useState<boolean>(false);
+  const [rejectLoading, setRejectLoading] = useState<boolean>(false);
+  const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
@@ -18,8 +24,90 @@ export default function ViewAccountApproval() {
     lng: parseFloat(res.longitude),
   };
 
+  const handleUpdateApprovalStatus = async (shopID: number, decision: string) => {
+    try {
+      if (decision === 'Approved') {
+        setApproveLoading(true);
+      } else {
+        setRejectLoading(true);
+      }
+
+      await updateApprovalStatus(shopID, decision);
+
+      setAlert({
+        type: 'success',
+        message: decision === 'Approved' ? 'Shop approved!' : 'Shop rejected',
+      });
+
+      alertTimer();
+    } catch {
+      setAlert({
+        type: 'error',
+        message: 'Something went wrong. Please try again.',
+      });
+
+      alertTimer();
+    } finally {
+      if (decision === 'Approved') {
+        setApproveLoading(false);
+      } else {
+        setRejectLoading(false);
+      }
+    }
+  };
+
+  const alertTimer = () => {
+    setTimeout(() => {
+      setAlert(null);
+      navigate('/account-approval');
+    }, 2000);
+  };
+
   return (
     <div>
+      {alert && (
+        <div
+          role="alert"
+          className={`alert ${alert.type === 'success' ? 'alert-success' : 'alert-error'} absolute justify-self-center`}
+        >
+          {alert.type === 'success' ? (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>{alert.message}</span>
+            </>
+          ) : (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>{alert.message}</span>
+            </>
+          )}
+        </div>
+      )}
+
       <h1 className="font-montserrat text-3xl text-[#000B58] font-bold">Shop Info</h1>
       <div className="bg-white rounded-box mt-10 p-10 shadow-lg">
         <div className="relative">
@@ -99,11 +187,17 @@ export default function ViewAccountApproval() {
         )}
 
         <div className="justify-self-center flex gap-3">
-          <button className="font-montserrat text-base bg-[#000B58] hover:bg-[#000B58]/75 cursor-pointer p-3 rounded-box w-50">
-            Approve
+          <button
+            onClick={() => handleUpdateApprovalStatus(res.repair_shop_id, 'Approved')}
+            className="font-montserrat text-base bg-[#000B58] hover:bg-[#000B58]/75 cursor-pointer p-3 rounded-box w-50"
+          >
+            {approveLoading ? <span className="loading loading-dots loading-sm"></span> : <p>Approve</p>}
           </button>
-          <button className="font-montserrat text-base bg-[#780606] hover:bg-[#780606]/75 cursor-pointer p-3 rounded-box w-50">
-            Reject
+          <button
+            onClick={() => handleUpdateApprovalStatus(res.repair_shop_id, 'Rejected')}
+            className="font-montserrat text-base bg-[#780606] hover:bg-[#780606]/75 cursor-pointer p-3 rounded-box w-50"
+          >
+            {rejectLoading ? <span className="loading loading-dots loading-sm"></span> : <p>Reject</p>}
           </button>
         </div>
       </div>

@@ -65,3 +65,19 @@ export const getUnAppShopInfo = async (shopID: number) => {
     return null;
   }
 };
+
+export const updateApprovalStatus = async (shopID: number, decision: string) => {
+  try {
+    const token = await getAccessToken();
+    await axios.patch(`${apiURL}/auto_repair_shop/update-approval-status`,
+      { shopID, decision },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      },
+    );
+  } catch (e) {
+    console.error('Update Approval Status Error:', e);
+  }
+};
