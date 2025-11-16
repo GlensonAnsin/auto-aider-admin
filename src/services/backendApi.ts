@@ -81,3 +81,91 @@ export const updateApprovalStatus = async (shopID: number, decision: string) => 
     console.error('Update Approval Status Error:', e);
   }
 };
+
+export const getAllUsers = async () => {
+  try {
+    const res = await axios.get(`${apiURL}/user/get-all`);
+    return res.data;
+  } catch (e) {
+    console.error('Get All Users Error:', e);
+  }
+};
+
+export const getAllShops = async () => {
+  try {
+    const res = await axios.get(`${apiURL}/auto_repair_shop/get-all`);
+    return res.data;
+  } catch (e) {
+    console.error('Get All Shops Error:', e);
+  }
+};
+
+export const countAllCO = async () => {
+  try {
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/user/count-all-co`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error('Count All Users Error:', e);
+  }
+};
+
+export const countAllRS = async () => {
+  try {
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/auto_repair_shop/count-all-rs`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error('Count All Shops Error:', e);
+  }
+};
+
+export const countScansToday = async () => {
+  try {
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/vehicle_diagnostic/count-scans-today`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error('Count Scans Today Error:', e);
+  }
+};
+
+export const newlyRegisteredCO = async () => {
+  try {
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/user/newly-registered-co`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error('Get Newly Registered CO Error:', e);
+  }
+};
+
+export const newlyRegisteredRS = async () => {
+  try {
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/auto_repair_shop/newly-registered-rs`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+    return res.data;
+  } catch (e) {
+    console.error('Get Newly Registered RS Error:', e);
+  }
+};

@@ -54,13 +54,9 @@ export default function Login() {
     <main className="h-screen w-screen">
       <div className="w-full h-1/10 bg-[#000B58]"></div>
       <div className="h-4/5 w-full bg-[#f2f4f7] flex items-center justify-center flex-col">
-        <div className="absolute top-1/10">
-          <img src={Logo} alt="logo" width={150} height={150} className="justify-self-center" />
-          <h1 className="font-montserrat text-[#000B58] font-bold text-4xl text-center">Auto AIDER</h1>
-        </div>
-
         <div className="bg-white rounded-xl p-5 shadow-lg">
-          <h2 className="font-montserrat font-bold text-2xl text-center mb-5 text-[#333]">Log In</h2>
+          <img src={Logo} alt="logo" width={100} height={100} className="justify-self-center" />
+          <h1 className="font-montserrat text-[#000B58] font-bold text-2xl text-center m-3">Auto AIDER</h1>
           <div className="flex flex-col mb-5">
             <label className="input validator bg-[#f2f4f7]">
               <svg className="h-[1em] opacity-50 text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
