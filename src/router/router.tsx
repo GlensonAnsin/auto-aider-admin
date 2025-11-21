@@ -9,7 +9,7 @@ import {
   getAllUnAppShops,
   getUnAppShopInfo,
   getAllUsers,
-  getAllShops,
+  getAllShopsForAdmin,
   countAllCO,
   countAllRS,
   countScansToday,
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         path: 'repair-shops',
         element: <RepairShops />,
         loader: async () => {
-          return { res: await getAllShops() };
+          return { res: await getAllShopsForAdmin() };
         },
       },
       {

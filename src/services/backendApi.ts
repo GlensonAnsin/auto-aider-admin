@@ -91,9 +91,14 @@ export const getAllUsers = async () => {
   }
 };
 
-export const getAllShops = async () => {
+export const getAllShopsForAdmin = async () => {
   try {
-    const res = await axios.get(`${apiURL}/auto_repair_shop/get-all`);
+    const token = await getAccessToken();
+    const res = await axios.get(`${apiURL}/auto_repair_shop/get-all-admin`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
     return res.data;
   } catch (e) {
     console.error('Get All Shops Error:', e);
