@@ -164,8 +164,8 @@ Create a `.env` file in the project root with the following variables:
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `VITE_BACKEND_API_URL` | Backend API endpoint | `https://auto-aider-backend.onrender.com/api` |
-| `VITE_BACKEND_BASE_URL` | Backend base URL for WebSocket | `https://auto-aider-backend.onrender.com` |
+| `VITE_BACKEND_API_URL` | Backend API endpoint | `https://app-name.com/api` |
+| `VITE_BACKEND_BASE_URL` | Backend base URL for WebSocket | `https://app-name.com` |
 | `VITE_GOOGLE_MAPS_API` | Google Maps API key | `AIzaSy...` |
 
 ## 🧩 Key Components
