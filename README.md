@@ -141,8 +141,8 @@ npm install
 
 3. Create `.env` file in the root directory with the following variables:
 ```env
-VITE_BACKEND_API_URL="https://auto-aider-backend.onrender.com/api"
-VITE_BACKEND_BASE_URL="https://auto-aider-backend.onrender.com"
+VITE_BACKEND_API_URL="https://app-name.com/api"
+VITE_BACKEND_BASE_URL="https://app-name.com"
 VITE_GOOGLE_MAPS_API="<YOUR_GOOGLE_MAPS_API_KEY>"
 ```
 
